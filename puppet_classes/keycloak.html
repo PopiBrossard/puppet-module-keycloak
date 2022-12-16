@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Puppet Class: keycloak
+  
+    &mdash; Documentation by YARD 0.9.28
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "puppet_classes::keycloak";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../puppet_class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (k)</a> &raquo;
+    <span class='title'><span class='object_link'>Puppet Classes</span></span>
+     &raquo; 
+    <span class="title">keycloak</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="../puppet_class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Puppet Class: keycloak</h1>
+<div class="box_info">
+  
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>
+      manifests/init.pp
+    </dd>
+  </dl>
+</div>
+
+  <h2>Summary</h2>
+  Manage Keycloak
+
+<h2>Overview</h2>
+<div class="docstring">
+  <div class="discussion">
+    
+  </div>
+</div>
+
+
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>include ::keycloak</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>manage_install</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Install Keycloak from upstream Keycloak tarball. Set to false to manage
+installation of Keycloak outside this module and set $install_dir to match.
+Defaults to true.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>version</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;19.0.3&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Version of Keycloak to install and manage.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>package_url</span>
+      
+      
+        <span class='type'>(<tt>Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>URL of the Keycloak download. Default is based on version.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>install_dir</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The directory of where to install Keycloak. Default is
+<code>/opt/keycloak-${version}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_declare_method</span>
+      
+      
+        <span class='type'>(<tt>Enum['include','class']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;class&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>How to declare the Java class within this module The <code>include</code>
+value only includes the java class The <code>class</code> method defines
+the Java class and passes necessary parameters For RedHat base systems this
+defaults to <code>class</code>, other OSes default to <code>include</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_package</span>
+      
+      
+        <span class='type'>(<tt>String[1]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;java-11-openjdk-devel&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Java package name, only used when <code>java_declare_method</code> is
+<code>class</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_home</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/lib/jvm/java-11-openjdk&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Java home path, only used when <code>java_declare_method</code> is
+<code>class</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_alternative_path</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/lib/jvm/java-11-openjdk/bin/java&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Java alternative path, only used when <code>java_declare_method</code> is
+<code>class</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_alternative</span>
+      
+      
+        <span class='type'>(<tt>String[1]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/lib/jvm/java-11-openjdk/bin/java&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Java alternative, only used when <code>java_declare_method</code> is
+<code>class</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak service name. Default is <code>keycloak</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_ensure</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;running&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak service ensure property. Default is <code>running</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_enable</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak service enable property. Default is <code>true</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>java_opts</span>
+      
+      
+        <span class='type'>(<tt>Optional[Variant[String, Array]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Sets additional options to Java virtual machine environment variable.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>start_command</span>
+      
+      
+        <span class='type'>(<tt>Enum['start','start-dev']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;start&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The start command to use to run Keycloak</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_extra_opts</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Additional options added to the end of the service command-line.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>service_environment_file</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Absolutepath]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to the file with environment variables for the systemd service</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>configs</span>
+      
+      
+        <span class='type'>(<tt>Keycloak::Configs</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Define additional configs for keycloak.conf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extra_configs</span>
+      
+      
+        <span class='type'>(<tt>Hash[String, Variant[String[1],Boolean,Array]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Additional configs for keycloak.conf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>hostname</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Host</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>$facts[&#39;networking&#39;][&#39;fqdn&#39;]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>hostname to set in keycloak.conf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>http_enabled</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Whether to enable HTTP</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>http_host</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::IP::Address</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;0.0.0.0&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTTP host</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>http_port</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Port</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>8080</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTTP port</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>https_port</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Port</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>8443</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>HTTPS port</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>http_relative_path</span>
+      
+      
+        <span class='type'>(<tt>Pattern[/^\/.*/]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Set the path relative to &#39;/&#39; for serving resources. The path must
+start with a &#39;/&#39;.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_user</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Defines if the module should manage the Linux user for Keycloak
+installation</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak user name. Default is <code>keycloak</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_shell</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/sbin/nologin&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak user shell.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak user group name. Default is <code>keycloak</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_uid</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak user UID. Default is <code>undef</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>group_gid</span>
+      
+      
+        <span class='type'>(<tt>Optional[Integer]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak user group GID. Default is <code>undef</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>system_user</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>If keycloak user should be a system user with lower uid and gid. Default is
+<code>true</code></p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>admin_user</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;admin&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak administrative username. Default is <code>admin</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>admin_user_password</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;changeme&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak administrative user password. Default is <code>changeme</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_db</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that determines if configured database will be managed.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_db_server</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Include the DB server class for postgres, mariadb or mysql</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db</span>
+      
+      
+        <span class='type'>(<tt>Enum['dev-file', 'dev-mem', 'mariadb', 'mysql', 'oracle', 'postgres']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;dev-file&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database driver to use for Keycloak.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_url_host</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Host]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database host.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_url_port</span>
+      
+      
+        <span class='type'>(<tt>Optional[Stdlib::Port]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database port.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_url</span>
+      
+      
+        <span class='type'>(<tt>Optional[String[1]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database url.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_url_database</span>
+      
+      
+        <span class='type'>(<tt>String[1]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_username</span>
+      
+      
+        <span class='type'>(<tt>String[1]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database user name.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_password</span>
+      
+      
+        <span class='type'>(<tt>String[1]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;changeme&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Database user password.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_charset</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;utf8&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>MySQL and MariaDB database charset</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>db_collate</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;utf8_general_ci&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>MySQL and MariaDB database collate</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>features</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String[1]]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak features to enable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>features_disabled</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array[String[1]]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Keycloak features to disable</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>truststore</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if truststore should be used. Default is
+<code>false</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>truststore_hosts</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define <code>keycloak::turststore::host</code>
+resources. Default is <code>{}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>truststore_password</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;keycloak&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Truststore password. Default is <code>keycloak</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>proxy</span>
+      
+      
+        <span class='type'>(<tt>Enum['edge','reencrypt','passthrough','none']</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;none&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Type of proxy to use for Keycloak</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>realms</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_realm resources. Default is
+<code>{}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>realms_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>realms</code> should be merged from Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>oidc_client_scopes</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak::client_scope::oidc resources. Default
+is <code>{}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>oidc_client_scopes_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>oidc_client_scopes</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saml_client_scopes</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak::client_scope::saml resources. Default
+is <code>{}</code>.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>saml_client_scopes_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>saml_client_scopes</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>identity_providers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_identity_provider resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>identity_providers_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>identity_providers</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_protocol_mappers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_client_protocol_mapper resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_scopes</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_client_scope resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>client_scopes_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>client_scopes</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol_mappers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_protocol_mapper resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>protocol_mappers_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>protocol_mappers</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clients</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_client resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>clients_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>clients</code> should be merged from Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flows</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash taht is used to define keycloak_flow resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flows_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>flows</code> should be merged from Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flow_executions</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash taht is used to define keycloak_flow resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>flow_executions_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>flows</code> should be merged from Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>required_actions</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_required_action resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>required_actions_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>required_actions</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ldap_mappers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_ldap_mapper resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ldap_mappers_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>ldap_mappers</code> should be merged from Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ldap_user_providers</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash that is used to define keycloak_ldap_user_provider resources.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>ldap_user_providers_merge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that sets if <code>ldap_user_providers</code> should be merged from
+Hiera.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>with_sssd_support</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that determines if SSSD user provider support should be available</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>libunix_dbus_java_source</span>
+      
+      
+        <span class='type'>(<tt>Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;https://github.com/keycloak/libunix-dbus-java/archive/libunix-dbus-java-0.8.0.tar.gz&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Source URL of libunix-dbus-java</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>install_libunix_dbus_java_build_dependencies</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that determines of libunix-dbus-java build dependencies are managed
+by this module</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>libunix_dbus_java_build_dependencies</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Packages needed to build libunix-dbus-java</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>libunix_dbus_java_libdir</span>
+      
+      
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/usr/lib64&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Path to directory to install libunix-dbus-java libraries</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>jna_package_name</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;jna&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Package name for jna</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_sssd_config</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that determines if SSSD ifp config for Keycloak is managed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>sssd_ifp_user_attributes</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>[]</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>user_attributes to define for SSSD ifp service</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>restart_sssd</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Boolean that determines if SSSD should be restarted</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>spi_deployments</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Hash used to define keycloak::spi_deployment resources</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>providers_purge</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Purge the providers directory of unmanaged SPIs</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>custom_config_content</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Custom configuration content to be added to keycloak.conf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>custom_config_source</span>
+      
+      
+        <span class='type'>(<tt>Optional[Variant[String, Array]]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Custom configuration source file to be added to keycloak.conf</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>validator_test_url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>&#39;/realms/master/.well-known/openid-configuration&#39;</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The URL path for validator testing Only necessary to set if the URL path to
+Keycloak is modified</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+
+</div><div class="method_details_list">
+  <table class="source_code">
+    <tr>
+      <td>
+        <pre class="lines">
+
+
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413</pre>
+      </td>
+      <td>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 209</span>
+
+class keycloak (
+  Boolean $manage_install       = true,
+  String $version               = &#39;19.0.3&#39;,
+  Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]]
+    $package_url                = undef,
+  Optional[Stdlib::Absolutepath] $install_dir = undef,
+  Enum[&#39;include&#39;,&#39;class&#39;] $java_declare_method = &#39;class&#39;,
+  String[1] $java_package = &#39;java-11-openjdk-devel&#39;,
+  Stdlib::Absolutepath $java_home = &#39;/usr/lib/jvm/java-11-openjdk&#39;,
+  Stdlib::Absolutepath $java_alternative_path = &#39;/usr/lib/jvm/java-11-openjdk/bin/java&#39;,
+  String[1] $java_alternative = &#39;/usr/lib/jvm/java-11-openjdk/bin/java&#39;,
+  String $service_name          = &#39;keycloak&#39;,
+  String $service_ensure        = &#39;running&#39;,
+  Boolean $service_enable       = true,
+  Optional[Variant[String, Array]] $java_opts = undef,
+  Enum[&#39;start&#39;,&#39;start-dev&#39;] $start_command = &#39;start&#39;,
+  Optional[String] $service_extra_opts = undef,
+  Optional[Stdlib::Absolutepath] $service_environment_file = undef,
+  Keycloak::Configs $configs = {},
+  Hash[String, Variant[String[1],Boolean,Array]] $extra_configs = {},
+  Stdlib::Host $hostname = $facts[&#39;networking&#39;][&#39;fqdn&#39;],
+  Boolean $http_enabled = true,
+  Stdlib::IP::Address $http_host = &#39;0.0.0.0&#39;,
+  Stdlib::Port $http_port = 8080,
+  Stdlib::Port $https_port = 8443,
+  Pattern[/^\/.*/] $http_relative_path = &#39;/&#39;,
+  Boolean $manage_user = true,
+  String $user                  = &#39;keycloak&#39;,
+  Stdlib::Absolutepath $user_shell = &#39;/sbin/nologin&#39;,
+  String $group                 = &#39;keycloak&#39;,
+  Boolean $system_user          = true,
+  Optional[Integer] $user_uid   = undef,
+  Optional[Integer] $group_gid  = undef,
+  String $admin_user            = &#39;admin&#39;,
+  String $admin_user_password   = &#39;changeme&#39;,
+  Boolean $manage_db = true,
+  Boolean $manage_db_server = true,
+  Enum[&#39;dev-file&#39;, &#39;dev-mem&#39;, &#39;mariadb&#39;, &#39;mysql&#39;, &#39;oracle&#39;, &#39;postgres&#39;] $db = &#39;dev-file&#39;,
+  Optional[Stdlib::Host] $db_url_host = undef,
+  Optional[Stdlib::Port] $db_url_port = undef,
+  Optional[String[1]] $db_url = undef,
+  String[1] $db_url_database = &#39;keycloak&#39;,
+  String[1] $db_username = &#39;keycloak&#39;,
+  String[1] $db_password = &#39;changeme&#39;,
+  String $db_charset = &#39;utf8&#39;,
+  String $db_collate = &#39;utf8_general_ci&#39;,
+  Optional[Array[String[1]]] $features = undef,
+  Optional[Array[String[1]]] $features_disabled = undef,
+  Boolean $truststore = false,
+  Hash $truststore_hosts = {},
+  String $truststore_password = &#39;keycloak&#39;,
+  Enum[&#39;edge&#39;,&#39;reencrypt&#39;,&#39;passthrough&#39;,&#39;none&#39;] $proxy = &#39;none&#39;,
+  Hash $realms = {},
+  Boolean $realms_merge = false,
+  Hash $oidc_client_scopes = {},
+  Boolean $oidc_client_scopes_merge = false,
+  Hash $saml_client_scopes = {},
+  Boolean $saml_client_scopes_merge = false,
+  Hash $client_protocol_mappers = {},
+  Hash $client_scopes = {},
+  Boolean $client_scopes_merge = false,
+  Hash $protocol_mappers = {},
+  Boolean $protocol_mappers_merge = false,
+  Hash $identity_providers = {},
+  Boolean $identity_providers_merge = false,
+  Hash $clients = {},
+  Boolean $clients_merge = false,
+  Hash $flows = {},
+  Boolean $flows_merge = false,
+  Hash $flow_executions = {},
+  Hash $required_actions = {},
+  Boolean $required_actions_merge = false,
+  Hash $ldap_mappers = {},
+  Boolean $ldap_mappers_merge = false,
+  Hash $ldap_user_providers = {},
+  Boolean $ldap_user_providers_merge = false,
+  Boolean $flow_executions_merge = false,
+  Boolean $with_sssd_support = false,
+  Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]
+    $libunix_dbus_java_source = &#39;https://github.com/keycloak/libunix-dbus-java/archive/libunix-dbus-java-0.8.0.tar.gz&#39;,
+  Boolean $install_libunix_dbus_java_build_dependencies = true,
+  Array $libunix_dbus_java_build_dependencies = [],
+  Stdlib::Absolutepath $libunix_dbus_java_libdir = &#39;/usr/lib64&#39;,
+  String $jna_package_name = &#39;jna&#39;,
+  Boolean $manage_sssd_config = true,
+  Array $sssd_ifp_user_attributes = [],
+  Boolean $restart_sssd = true,
+  Hash $spi_deployments = {},
+  Boolean $providers_purge = true,
+  Optional[String] $custom_config_content = undef,
+  Optional[Variant[String, Array]] $custom_config_source = undef,
+  String $validator_test_url = &#39;/realms/master/.well-known/openid-configuration&#39;,
+) {
+
+  if ! ($facts[&#39;os&#39;][&#39;family&#39;] in [&#39;RedHat&#39;,&#39;Debian&#39;]) {
+    fail(&quot;Unsupported osfamily: ${facts[&#39;os&#39;][&#39;family&#39;]}, module ${module_name} only support osfamilies Debian and Redhat&quot;)
+  }
+
+  $download_url = pick($package_url, &quot;https://github.com/keycloak/keycloak/releases/download/${version}/keycloak-${version}.tar.gz&quot;)
+
+  $install_base = pick($install_dir, &quot;/opt/keycloak-${keycloak::version}&quot;)
+  $admin_env = &quot;${install_base}/conf/admin.env&quot;
+  $truststore_file = &quot;${install_base}/conf/truststore.jks&quot;
+  $tmp_dir = &quot;${install_base}/tmp&quot;
+  $providers_dir = &quot;${install_base}/providers&quot;
+
+  $default_config = {
+    &#39;hostname&#39; =&gt; $hostname,
+    &#39;http-enabled&#39; =&gt; $http_enabled,
+    &#39;http-host&#39; =&gt; $http_host,
+    &#39;http-port&#39; =&gt; $http_port,
+    &#39;https-port&#39; =&gt; $https_port,
+    &#39;http-relative-path&#39; =&gt; $http_relative_path,
+    &#39;db&#39; =&gt; $db,
+    &#39;db-url-host&#39; =&gt; $db_url_host,
+    &#39;db-url-port&#39; =&gt; $db_url_port,
+    &#39;db-url&#39; =&gt; $db_url,
+    &#39;db-url-database&#39; =&gt; $db_url_database,
+    &#39;db-username&#39; =&gt; $db_username,
+    &#39;db-password&#39; =&gt; $db_password,
+    &#39;features&#39; =&gt; $features,
+    &#39;features-disabled&#39; =&gt; $features_disabled,
+    &#39;proxy&#39; =&gt; $proxy,
+  }
+  if $truststore {
+    $truststore_configs = {
+      &#39;https-trust-store-file&#39; =&gt; $truststore_file,
+      &#39;https-trust-store-password&#39; =&gt; $truststore_password,
+    }
+  } else {
+    $truststore_configs = {}
+  }
+  $config = $default_config + $truststore_configs + $configs + $extra_configs
+
+  if $config[&#39;http-enabled&#39;] {
+    $wrapper_protocol = &#39;http&#39;
+    $wrapper_port = $config[&#39;http-port&#39;]
+    $validator_port = $config[&#39;http-port&#39;]
+    $validator_ssl = false
+    if $config[&#39;http-host&#39;] in [&#39;0.0.0.0&#39;, &#39;127.0.0.1&#39;] {
+      $wrapper_address = &#39;localhost&#39;
+      $validator_server = &#39;localhost&#39;
+    } else {
+      $wrapper_address = $config[&#39;http-host&#39;]
+      $validator_server = $config[&#39;http-host&#39;]
+    }
+  } else {
+    $wrapper_protocol = &#39;https&#39;
+    $wrapper_port = $config[&#39;https-port&#39;]
+    $wrapper_address = $config[&#39;hostname&#39;]
+    $validator_port = $config[&#39;https-port&#39;]
+    $validator_server = $config[&#39;hostname&#39;]
+    $validator_ssl = true
+  }
+  $wrapper_server = &quot;${wrapper_protocol}://${wrapper_address}:${wrapper_port}${config[&#39;http-relative-path&#39;]}&quot;
+
+  $service_start = [
+    &quot;${install_base}/bin/kc.sh&quot;,
+    $start_command,
+    $service_extra_opts,
+  ].filter |$s| { $s =~ NotUndef }
+  $service_start_cmd = join($service_start, &#39; &#39;)
+
+  if $java_declare_method == &#39;include&#39; {
+    contain java
+  } else {
+    class { &#39;java&#39;:
+      package               =&gt; $java_package,
+      java_home             =&gt; $java_home,
+      java_alternative_path =&gt; $java_alternative_path,
+      java_alternative      =&gt; $java_alternative,
+    }
+  }
+
+  contain &#39;keycloak::install&#39;
+  contain &#39;keycloak::config&#39;
+  contain &#39;keycloak::service&#39;
+
+  Class[&#39;java&#39;]
+  -&gt; Class[&#39;keycloak::install&#39;]
+  -&gt; Class[&#39;keycloak::config&#39;]
+  -&gt; Class[&#39;keycloak::service&#39;]
+
+  if $db in [&#39;mysql&#39;,&#39;mariadb&#39;,&#39;postgres&#39;] {
+    contain &quot;keycloak::db::${db}&quot;
+    Class[&quot;keycloak::db::${db}&quot;]~&gt;Class[&#39;keycloak::service&#39;]
+  }
+
+  if $with_sssd_support {
+    contain &#39;keycloak::sssd&#39;
+    Class[&#39;keycloak::sssd&#39;] ~&gt; Class[&#39;keycloak::service&#39;]
+  }
+
+  keycloak_conn_validator { &#39;keycloak&#39;:
+    keycloak_server =&gt; $validator_server,
+    keycloak_port   =&gt; $validator_port,
+    use_ssl         =&gt; $validator_ssl,
+    timeout         =&gt; 60,
+    test_url        =&gt; $validator_test_url,
+    require         =&gt; Class[&#39;keycloak::service&#39;],
+  }
+
+  include keycloak::resources
+
+}</pre>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+
+      <div id="footer">
+     Generated by <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>.
+</div>
+
+    </div>
+  </body>
+</html>
